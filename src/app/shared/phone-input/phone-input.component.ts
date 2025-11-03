@@ -5,8 +5,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validator, Abst
 @Component({
   selector: 'app-phone-input',
   templateUrl: './phone-input.component.html',
-  imports: [CommonModule],
-  styleUrls: ['./phone-input.component.css'],
+  imports: [CommonModule],  
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => PhoneInputComponent), multi: true },
     { provide: NG_VALIDATORS, useExisting: forwardRef(() => PhoneInputComponent), multi: true },

@@ -41,14 +41,7 @@ type PacienteHeader = { id:string; nombre:string; telefono?:string|null; ocupaci
     MatButtonModule, MatIconModule, MatSelectModule, MatInputModule,
     MatDatepickerModule, MatNativeDateModule
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [`
-    .card { @apply bg-white rounded-2xl shadow; }
-    .accent { color:#06b6d4; }
-    .chip  { @apply inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs bg-cyan-50 text-cyan-700; }
-    .pill  { @apply inline-block rounded px-2 py-0.5 bg-gray-50 border border-gray-200 text-xs; }
-    .btn-primary { background:#06b6d4; color:#fff; }
-  `],
+  changeDetection: ChangeDetectionStrategy.OnPush,  
   template: `
   <section class="space-y-4">
     <!-- Header paciente -->

@@ -1,83 +1,240 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import "tailwindcss";
-
-/* Component layer (clases utilitarias propias) */
-@layer components {
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 80rem; /* max-w-7xl */
-    padding-left: 1rem; /* px-4 */
-    padding-right: 1rem;
-  }
-  .card {
-    background-color: #fff; /* bg-white */
-    border-radius: 1rem; /* rounded-2xl */
-    box-shadow: 0 2px 8px 0 rgba(99, 102, 241, 0.08); /* shadow-soft (approximate) */
-    border: 1px solid #f3f4f6; /* border border-gray-100 */
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem; /* gap-2 */
-    border-radius: 0.75rem; /* rounded-xl */
-    padding-left: 1rem; /* px-4 */
-    padding-right: 1rem;
-    padding-top: 0.5rem; /* py-2 */
-    padding-bottom: 0.5rem;
-    font-weight: 500; /* font-medium */
-    transition: all 0.2s;
-  }
-  .btn-primary {
-    background-color: #06b6d4; /* bg-brand-600 */
-    color: #fff; /* text-white */
-  }
-  .btn-primary:hover {
-    background-color: #4338ca; /* hover:bg-brand-700 */
-  }
-  .link {
-    color: #4f46e5; /* text-brand-600 */
-    text-decoration: underline;
-  }
-  .link:hover {
-    color: #4338ca; /* hover:text-brand-700 */
-  }
+/* =====================================================
+   🎨 VARIABLES GLOBALES (para colores y consistencia)
+===================================================== */
+:root {
+  --c-cyan-50: rgb(236 254 255);
+  --c-cyan-100: rgb(207 250 254);
+  --c-cyan-400: rgb(34 211 238);
+  --c-cyan-500: rgb(6 182 212);
+  --c-cyan-700: rgb(14 116 144);
+  --c-gray-50: rgb(249 250 251);
+  --c-gray-100: rgb(243 244 246);
+  --c-gray-200: rgb(229 231 235);
+  --c-gray-700: rgb(55 65 81);
+  --c-brand: var(--c-cyan-500);
 }
 
-/* Global */
+/* =====================================================
+   🌐 BASE GLOBAL
+===================================================== */
 html, body { height: 100%; }
 body {
   margin: 0;
   overflow: hidden;
   font-family: Inter, system-ui, -apple-system, Roboto, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans',
                'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  background-color: var(--c-gray-50);
 }
 
-/* Material: item activo en el menú */
-.mdc-list-item.active { background: #f3f4f6; }  /* gray-100 */
-.mdc-list-item a { text-decoration: none; }
+/* =====================================================
+   🧱 LAYOUTS & CONTAINERS
+===================================================== */
+.container {
+  @apply mx-auto px-[1rem] max-w-[80rem];
+}
 
-/* En styles.css o en el archivo de estilos global */
+.card {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid var(--c-gray-100);
+  box-shadow: 0 2px 8px 0 rgba(6, 182, 212, 0.08);
+}
+
+/* =====================================================
+   🔘 BOTONES Y LINKS
+===================================================== */
+.btn {
+  @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium transition-all duration-200;
+}
+
+.btn-primary {
+  background-color: var(--c-brand);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: rgb(67 56 202);
+}
+
+.link {
+  color: rgb(79 70 229);
+  text-decoration: underline;
+}
+.link:hover {
+  color: rgb(67 56 202);
+}
+
+/* =====================================================
+   ✅ SNACKBARS
+===================================================== */
 .snackbar-success {
-  background-color: #10b981 !important;
+  background-color: rgb(16 185 129) !important;
   color: white !important;
 }
-
 .snackbar-error {
-  background-color: #ef4444 !important;
+  background-color: rgb(239 68 68) !important;
   color: white !important;
-  white-space: pre-wrap; /* Permite saltos de línea */
+  white-space: pre-wrap;
   max-width: 500px !important;
 }
-
 .snackbar-info {
-  background-color: #3b82f6 !important;
+  background-color: rgb(59 130 246) !important;
   color: white !important;
 }
 
+/* =====================================================
+   🧩 MATERIAL DIALOGS
+===================================================== */
 ::ng-deep .mat-mdc-dialog-container.historial-dialog .mdc-dialog__surface {
   border-radius: 1rem;
-  border: 2px solid #06b6d4;
+  border: 2px solid var(--c-brand);
   box-shadow: 0 4px 30px rgba(6, 182, 212, 0.2);
 }
+
+/* =====================================================
+   🧠 INPUTS MODERNOS
+===================================================== */
+.modern-input {
+  @apply border-[color-mix(in_oklab,var(--c-cyan-400)_60%,transparent)]
+         rounded-lg px-3 py-2 bg-[var(--c-gray-50)] text-[var(--c-gray-700)]
+         focus:outline-none focus:ring-2 focus:ring-[var(--c-brand)]
+         focus:border-[var(--c-brand)]
+         shadow-inner transition duration-200;
+}
+.modern-input:hover {
+  @apply border-[var(--c-brand)] shadow-md bg-white;
+}
+
+/* =====================================================
+   📊 KPIs
+===================================================== */
+.kpi-card {
+  @apply bg-white p-5 rounded-2xl shadow-md border border-[var(--c-cyan-100)]
+         hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group min-w-[260px];
+}
+.kpi-item {
+  @apply flex flex-col items-start justify-center border border-[var(--c-brand)];
+}
+
+/* =====================================================
+   🪪 CHIPS, PILLS, ESTADOS
+===================================================== */
+.chip {
+  @apply inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs border border-[var(--c-brand)] text-[var(--c-brand)];
+}
+.pill {
+  @apply inline-block rounded px-2 py-0.5 bg-[var(--c-gray-50)] border border-[var(--c-gray-200)] text-xs;
+}
+.status-badge {
+  @apply inline-flex items-center rounded-full border;
+}
+.status-dot {
+  @apply rounded-full;
+}
+
+/* =====================================================
+   🗂️ SECCIONES Y ENCABEZADOS
+===================================================== */
+.section-header {
+  @apply flex items-center border-b border-[color-mix(in_oklab,var(--c-brand)_30%,transparent)];
+}
+.section-icon {
+  @apply text-[var(--c-brand)];
+}
+.count-badge {
+  @apply ml-auto py-1 px-2 rounded-full bg-[var(--c-brand)] text-white text-xs;
+}
+
+/* =====================================================
+   🪞 TABLAS MODERNAS
+===================================================== */
+.table-wrapper {
+  @apply rounded-xl border border-[var(--c-gray-200)] overflow-hidden;
+}
+.modern-table {
+  @apply w-full border-collapse;
+}
+.modern-table thead tr {
+  @apply bg-gradient-to-r from-[rgb(236_254_255)] to-[rgb(219_234_254)];
+}
+.modern-table th {
+  @apply px-4 py-3 text-[var(--c-gray-700)] uppercase tracking-wider border-b border-[color-mix(in_oklab,var(--c-brand)_30%,transparent)] text-center;
+}
+.modern-table td {
+  @apply px-4 py-3 border-b border-[var(--c-gray-200)] text-center;
+}
+.modern-table tbody tr:last-child td {
+  @apply border-b-0;
+}
+.modern-table tbody tr:hover {
+  @apply bg-[color-mix(in_oklab,var(--c-cyan-50)_50%,transparent)];
+}
+
+/* =====================================================
+   📦 TARJETAS E ITEMS
+===================================================== */
+.item-card {
+  @apply p-4 bg-[var(--c-gray-50)] rounded-lg border border-[var(--c-gray-200)];
+}
+.item-title {
+  @apply text-[var(--c-gray-700)] font-medium mb-1;
+}
+.item-detail {
+  @apply flex items-start gap-2;
+}
+.detail-label {
+  @apply text-[var(--c-gray-700)] min-w-[120px] flex-shrink-0;
+}
+
+/* =====================================================
+   👁️ AGUDEZA VISUAL / VISITA DETALLE
+===================================================== */
+.vision-card {
+  @apply rounded-xl border border-[var(--c-gray-200)] overflow-hidden;
+}
+.card-header {
+  @apply flex items-center px-4 py-3 border-b border-[var(--c-gray-200)];
+}
+.vision-content {
+  @apply p-4 space-y-2;
+}
+.vision-item {
+  @apply flex justify-between items-center py-2 bg-[var(--c-gray-50)] rounded-lg;
+}
+
+/* =====================================================
+   📱 RESPONSIVE GRID
+===================================================== */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+  justify-items: center;
+}
+@media (min-width: 640px) {
+  .responsive-grid { gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .responsive-grid { gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+}
+@media (min-width: 1280px) {
+  .responsive-grid { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+}
+.grid-item {
+  width: min(100%, 500px);
+  min-width: 0;
+  justify-self: center;
+}
+
+/* =====================================================
+   🌈 OTROS
+===================================================== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.modal-container { width: 95vw; max-width: 1400px; }
+.group:hover h4, .group:hover .material-icons { color: var(--c-brand); }

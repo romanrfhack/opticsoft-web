@@ -54,16 +54,7 @@ export class AvFilterPipe implements PipeTransform {
   standalone: true,
   selector: 'app-visita-detalle',
   imports: [CommonModule, MatIconModule, MatDividerModule, MatButtonModule, AvFilterPipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [`
-    .card { @apply bg-white rounded-2xl shadow p-4 md:p-6; }
-    .section { @apply mb-4 md:mb-6; }
-    .section h3 { @apply text-base md:text-lg font-semibold mb-3 flex items-center gap-2; }
-    .section h3 mat-icon { color:#06b6d4 !important; }
-    .chip { @apply inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs bg-cyan-50 text-cyan-700; }
-    .pill { @apply inline-block rounded px-2 py-0.5 bg-gray-50 border border-gray-200 text-xs; }
-    .btn-primary { background:#06b6d4; color:#fff; }
-  `],
+  changeDetection: ChangeDetectionStrategy.OnPush,  
   template: `
     <div class="card space-y-4 md:space-y-6" *ngIf="vm(); else loadingTpl">
       <!-- Encabezado -->

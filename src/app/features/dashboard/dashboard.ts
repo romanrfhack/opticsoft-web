@@ -10,8 +10,7 @@ import { DashboardService } from '../../core/dashboard.service';
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, NgApexchartsModule],
-  templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css']
+  templateUrl: './dashboard.html'  
 })
 export class DashboardComponent {
   private fb = inject(FormBuilder);
