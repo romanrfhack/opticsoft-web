@@ -43,7 +43,7 @@ import { CompactSucursalSwitcherComponent } from '../../shared/sucursal-switcher
     >
       <div class="p-4">
         <div class="flex items-center gap-3">
-          <img src="assets/img/logoShell.webp" alt="Ópticas Olivar" class="h-8 w-auto max-w-[180px] object-contain select-none" />
+          <img src="assets/img/logoShell.webp" alt="Opticsoft" class="h-8 w-auto max-w-[180px] object-contain select-none" />
         </div>
         <div class="text-xs text-gray-500 mt-2">Panel de administración</div>
       </div>
@@ -110,7 +110,7 @@ import { CompactSucursalSwitcherComponent } from '../../shared/sucursal-switcher
           </button>
 
           <!-- Logo -->
-          <span class="ml-2 font-semibold hidden sm:inline">Ópticas Olivar</span>
+          <span class="ml-2 font-semibold hidden sm:inline">Opticsoft</span>
 
           <span class="flex-1"></span>
 

@@ -2,8 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -11,60 +9,109 @@ import { AuthService } from './auth.service';
   selector: 'app-login-page',
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-  <div class="relative min-h-screen flex items-center justify-center p-4 bg-no-repeat bg-cover bg-center"
+  <div class="relative min-h-screen flex items-center justify-center overflow-hidden
+              bg-cover bg-center"
        [style.background-image]="'url(' + bgUrl + ')'">
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black/10"></div>
 
-    <div class="relative w-full max-w-md bg-white/95 backdrop-blur rounded-2xl shadow-md p-6">      
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-[rgb(0_0_0_/_0.45)] backdrop-blur-[3px]"></div>
+
+    <!-- Contenedor del formulario -->
+    <div class="relative z-10 w-[90%] sm:w-[420px] 
+                bg-[rgb(255_255_255_/_0.1)] backdrop-blur-2xl
+                border border-[rgb(255_255_255_/_0.2)]
+                rounded-[1.5rem] shadow-[0_8px_40px_rgb(0_0_0_/_0.25)]
+                p-[2rem] animate-fade-up
+                hover:shadow-[0_10px_45px_rgb(6_182_212_/_0.35)] 
+                transition-all duration-500 ease-out">
+
       <!-- Logo -->
-      <div class="mb-4 flex justify-center">
-        <img [src]="logoUrl" alt="Óptica" class="w-40 h-20 object-contain select-none" />
+      <div class="flex justify-center mb-[1.5rem]">
+        <img [src]="logoUrl" alt="Logo Opticsoft"
+             class="w-[9rem] h-[4.5rem] object-contain select-none" />
       </div>
 
       <!-- Encabezado -->
-      <div class="mb-6 text-center text-lg">
-        <div class="text-2xl font-semibold text-gray-900">          
-          <span class="bg-gradient-to-br from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-            Opticsoft Web
-          </span>
-        </div>
-        <div class="text-sm text-gray-500">Acceso</div>
+      <div class="text-center mb-[2rem]">
+        <h1 class="text-[1.8rem] font-semibold tracking-tight
+                   text-transparent bg-clip-text
+                   bg-gradient-to-r from-[rgb(37_99_235)] to-[rgb(6_182_212)]">
+          Bienvenido a Opticsoft
+        </h1>
+        <p class="text-[0.9rem] text-[rgb(229_231_235)] mt-[0.25rem]">
+          Ingresa tus credenciales para continuar
+        </p>
       </div>
 
-      <form [formGroup]="form" class="space-y-4" (ngSubmit)="submit()">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
-          <input type="email" formControlName="email"
-                 class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#06b6d4]" />
+      <!-- Formulario -->
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-[1.25rem]">
+        
+        <!-- Campo correo -->
+        <div class="relative">
+          <span class="material-icons absolute left-[0.75rem] top-1/2 -translate-y-1/2 
+                        text-[rgb(148_163_184)] text-[1.2rem] select-none">mail</span>
+          <input type="email" formControlName="email" placeholder="Correo electrónico"
+                 class="w-full rounded-[0.75rem] border border-[rgb(255_255_255_/_0.25)]
+                        bg-[rgb(255_255_255_/_0.1)] text-[rgb(243_244_246)]
+                        pl-[2.5rem] pr-[1rem] py-[0.7rem]
+                        placeholder:text-[rgb(156_163_175)]
+                        focus:outline-none focus:ring-[2px] focus:ring-[rgb(6_182_212)]
+                        transition-all duration-200" />
         </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-          <input type="password" formControlName="password"
-                 class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#06b6d4]" />
+        <!-- Campo contraseña -->
+        <div class="relative">
+          <span class="material-icons absolute left-[0.75rem] top-1/2 -translate-y-1/2 
+                        text-[rgb(148_163_184)] text-[1.2rem] select-none">lock</span>
+          <input type="password" formControlName="password" placeholder="Contraseña"
+                 class="w-full rounded-[0.75rem] border border-[rgb(255_255_255_/_0.25)]
+                        bg-[rgb(255_255_255_/_0.1)] text-[rgb(243_244_246)]
+                        pl-[2.5rem] pr-[1rem] py-[0.7rem]
+                        placeholder:text-[rgb(156_163_175)]
+                        focus:outline-none focus:ring-[2px] focus:ring-[rgb(6_182_212)]
+                        transition-all duration-200" />
         </div>
 
-        <div class="flex items-center justify-between text-sm">
-          <a class="text-[#06b6d4] hover:underline cursor-pointer" (click)="goForgot()">¿Olvidó su contraseña?</a>
-          <!-- <a class="text-gray-600 hover:underline cursor-pointer" (click)="goSoporte()">Soporte técnico</a> -->
+        <!-- Enlace recuperación -->
+        <div class="flex justify-end text-[0.85rem]">
+          <a class="text-[rgb(6_182_212)] hover:underline cursor-pointer"
+             (click)="goForgot()">¿Olvidó su contraseña?</a>
         </div>
 
+        <!-- Botón -->
         <button type="submit"
                 [disabled]="form.invalid || loading()"
-                class="w-full rounded-lg bg-[#06b6d4] text-white py-2 font-medium hover:opacity-90 disabled:opacity-50 transition">
-          {{ loading() ? 'Entrando…' : 'Entrar' }}
+                class="w-full py-[0.7rem] rounded-[0.75rem] 
+                       text-white font-semibold tracking-wide
+                       bg-gradient-to-r from-[rgb(37_99_235)] to-[rgb(6_182_212)]
+                       shadow-[0_4px_20px_rgb(6_182_212_/_0.3)]
+                       transition-all duration-300 ease-out
+                       hover:shadow-[0_8px_25px_rgb(6_182_212_/_0.4)]
+                       hover:-translate-y-[2px] disabled:opacity-50">
+          {{ loading() ? 'Entrando…' : 'Iniciar sesión' }}
         </button>
 
-        <p *ngIf="error()" class="text-center text-sm text-red-600">{{ error() }}</p>
+        <!-- Error -->
+        <p *ngIf="error()" 
+           class="text-center text-[0.85rem] text-[rgb(252_165_165)] mt-[0.5rem]">
+          {{ error() }}
+        </p>
       </form>
     </div>
   </div>
-  `
+  `,
+  styles: [`
+    @keyframes fade-up {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up {
+      animation: fade-up 0.8s ease-out both;
+    }
+  `]
 })
 export class LoginPage {
   private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
   private auth = inject(AuthService);
   private router = inject(Router);
 
@@ -81,56 +128,51 @@ export class LoginPage {
 
   submit() {
     if (this.form.invalid) return;
-    this.loading.set(true); 
+    this.loading.set(true);
     this.error.set(null);
+
     const { email, password } = this.form.value as any;
 
     this.auth.login(email, password).subscribe({
-        next: (res) => this.handleLoginSuccess(res),
-        error: () => this.handleLoginError()
+      next: (res) => this.handleLoginSuccess(res),
+      error: () => this.handleLoginError()
     });
   }
 
   private handleLoginSuccess(res: any): void {
-      this.auth.persist(res);
-      this.loading.set(false);
-      
-      const userRoles = this.auth.user()?.roles || [];
-      console.log('Roles del usuario:', userRoles);
-
-      this.navigateByRole(userRoles);
+    this.auth.persist(res);
+    this.loading.set(false);
+    const roles = this.auth.user()?.roles || [];
+    this.navigateByRole(roles);
   }
 
   private handleLoginError(): void {
-      this.error.set('Credenciales inválidas');
-      this.loading.set(false);
+    this.error.set('Credenciales inválidas');
+    this.loading.set(false);
   }
 
   private navigateByRole(roles: string[]): void {
-    const navigationRoutes = {
-          mensajero: '/ordenes',
-          admin: '/dashboard',
-          encargado: '/dashboard',
-          default: '/clinica/historia'
-      };
-
-      if (roles.includes('Mensajero')) {
+    const routes = {
+      mensajero: '/ordenes',
+      admin: '/dashboard',
+      encargado: '/dashboard',
+      default: '/clinica/historia'
+    };
+    if (roles.includes('Mensajero')) {
           console.log('El usuario es un Mensajero');
-          this.router.navigate([navigationRoutes.mensajero]);
+          this.router.navigate([routes.mensajero]);
           return;
       }
 
       if (roles.includes('Admin') || roles.includes('Encargado')) {
           console.log('El usuario es Admin o Encargado');
-          this.router.navigate([navigationRoutes.admin]);
+          this.router.navigate([routes.admin]);
           return;
       }
 
       console.log('Navegando a ruta por defecto');
-      this.router.navigate([navigationRoutes.default]);
+      this.router.navigate([routes.default]);
   }
 
-  goLogin(){ this.router.navigateByUrl('/login'); }
-  goForgot(){ this.router.navigateByUrl('/forgot-password'); }
-  goSoporte(){ this.router.navigateByUrl('/soporte'); }
-}
+  goForgot() { this.router.navigateByUrl('/forgot-password'); }
+}     

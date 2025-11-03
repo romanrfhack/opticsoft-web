@@ -1,40 +1,83 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* === Tailwind 4 components (sin @apply obsoletos) === */
+/* === Estilos base globales === */
+@layer base {
+  html, body {
+    height: 100%;
+    color: rgb(243 244 246); /* gris claro */
+    background-color: transparent;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+}
+
+/* === Componentes personalizados === */
 @layer components {
+  /* ---- Contenedor general ---- */
   .container {
     margin-left: auto;
     margin-right: auto;
     padding-left: 1rem;
     padding-right: 1rem;
-    max-width: 80rem; /* equivalente a max-w-7xl */
+    max-width: 80rem; /* similar a max-w-7xl */
   }
 
+  /* ---- Tarjetas y paneles ---- */
   .card {
-    background-color: rgb(255 255 255);
+    background-color: rgb(255 255 255 / 0.9);
     border-radius: 1rem;
-    border: 1px solid rgb(229 231 235);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgb(229 231 235 / 0.6);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 0.05);
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem; /* gap-2 */
-    border-radius: 0.75rem;
-    padding: 0.5rem 1rem;
-    font-weight: 500;
+  /* ---- Efecto Glass para login ---- */
+  .glass-card {
+    background-color: rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 8px 40px rgb(0 0 0 / 0.25);
+  }
+
+  /* ---- Input moderno ---- */
+  .input-modern {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(255 255 255 / 0.25);
+    background-color: rgb(255 255 255 / 0.1);
+    color: rgb(243 244 246);
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
     transition: all 0.2s ease;
   }
 
-  .btn-primary {
-    background-color: rgb(6 182 212); /* cyan-500 */
-    color: white;
+  .input-modern::placeholder {
+    color: rgb(156 163 175);
   }
 
-  .btn-primary:hover {
-    background-color: rgb(67 56 202); /* indigo-700 */
+  .input-modern:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(6 182 212 / 0.7);
+    border-color: rgb(6 182 212);
+  }
+
+  /* ---- Botón con gradiente ---- */
+  .btn-gradient {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    color: white;
+    background-image: linear-gradient(to right, rgb(37 99 235), rgb(6 182 212));
+    box-shadow: 0 4px 20px rgb(6 182 212 / 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    box-shadow: 0 8px 25px rgb(6 182 212 / 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-gradient:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
