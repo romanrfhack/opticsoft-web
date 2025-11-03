@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Opticas": {
+    "Opticsoft": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -71,10 +71,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Opticas:build:production"
+              "buildTarget": "Opticsoft:build:production"
             },
             "development": {
-              "buildTarget": "Opticas:build:development"
+              "buildTarget": "Opticsoft:build:development"
             }
           },
           "defaultConfiguration": "development"
