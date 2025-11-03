@@ -25,23 +25,36 @@ import { AuthService } from './auth.service';
                 hover:shadow-[0_10px_45px_rgb(6_182_212_/_0.35)] 
                 transition-all duration-500 ease-out">
 
-      <!-- Logo -->
-      <div class="flex justify-center mb-[1.5rem]">
-        <img [src]="logoUrl" alt="Logo Opticsoft"
-             class="w-[9rem] h-[4.5rem] object-contain select-none" />
+      <!-- Logo -->      
+      <div class="flex justify-center mb-[1.5rem] animate-fade-in">
+        <img
+          [src]="logoUrl"
+          alt="Logo Opticsoft"
+          class="w-[11rem] h-auto sm:w-[13rem] md:w-[15rem]
+                object-contain drop-shadow-[0_6px_12px_rgba(6,182,212,0.35)]
+                select-none transition-transform duration-500 hover:scale-105"
+        />
       </div>
 
-      <!-- Encabezado -->
-      <div class="text-center mb-[2rem]">
-        <h1 class="text-[1.8rem] font-semibold tracking-tight
-                   text-transparent bg-clip-text
-                   bg-gradient-to-r from-[rgb(37_99_235)] to-[rgb(6_182_212)]">
-          Bienvenido a Opticsoft
+
+      <!-- Encabezado -->       
+      <div class="text-center mb-[1.5rem] animate-fade-in space-y-[1rem]">
+        <h1
+          class="text-glow font-semibold tracking-tight leading-[1.4]
+                text-[1.75rem] sm:text-[2rem] md:text-[2.25rem]">
+          Bienvenido
         </h1>
-        <p class="text-[0.9rem] text-[rgb(229_231_235)] mt-[0.25rem]">
+        <p
+          class="text-[0.95rem] sm:text-[1rem] text-[rgb(229_231_235)] opacity-90"
+          style="animation: fadeInUpBlur 1.3s ease-out both;">
           Ingresa tus credenciales para continuar
         </p>
       </div>
+
+    
+
+
+
 
       <!-- Formulario -->
       <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-[1.25rem]">
