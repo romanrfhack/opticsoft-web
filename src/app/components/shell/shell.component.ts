@@ -36,7 +36,7 @@ import { CompactSucursalSwitcherComponent } from '../../shared/sucursal-switcher
     <!-- SIDENAV -->
     <mat-sidenav #sidenav
       [mode]="isHandset() ? 'over' : 'side'"
-      [opened]="!isHandset() && opened()"
+      [opened]="opened()"
       [fixedInViewport]="isHandset()"
       [fixedTopGap]="64"
       class="w-72"
@@ -255,7 +255,14 @@ export class ShellComponent {
   goSoporte(){ this.router.navigateByUrl('/soporte'); }
 
   constructor() {
-    this.bp.observe([Breakpoints.Handset]).subscribe(r => this.isHandset.set(r.matches));
+     this.bp.observe([Breakpoints.Handset]).subscribe(r => {
+      this.isHandset.set(r.matches);    
+      if (r.matches) {      
+        this.opened.set(false);
+      } else {      
+        this.opened.set(true);
+      }
+    });
   }
 
   toggle() {
